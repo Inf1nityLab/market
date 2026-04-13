@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      home: const ForgotPasswordScreen(),
+      home: const GoogleAuthScreen(),
     );
   }
 }
@@ -36,6 +36,32 @@ class LestStarte extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomSheet: ElevatedButton(onPressed: (){}, child: Text('Hello')),
+      appBar: AppBar(),
+      body: RichText(
+        text: TextSpan(
+          style: TextStyle(color: Colors.black, fontSize: 16),
+          children: [
+            TextSpan(text: "У вас есть аккаунт? "),
+            WidgetSpan(
+              alignment: PlaceholderAlignment.middle,
+              child: TextButton(
+                onPressed: () {
+                  // Действие при нажатии
+                },
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 4),
+                  minimumSize: Size.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                child: Text(
+                  "Войти",
+                  style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -10,7 +10,6 @@ class SignUpScreen extends StatelessWidget {
     return AuthBody(
       title: 'Sign up',
       textButton: 'Sign up',
-      visible: false,
       body: Column(
         mainAxisAlignment: .center,
         children: [

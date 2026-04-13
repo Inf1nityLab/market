@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:marketplace/feature/auth/widgets/image_body.dart';
 
@@ -14,13 +12,11 @@ class ForgotPasswordScreen extends StatelessWidget {
     return AuthBody(
       title: 'Forgot Password',
       textButton: 'Sign up',
-      visible: false,
       body: Column(
         mainAxisAlignment: .center,
         children: [
           ImageBody(),
           AppTextFormField(title: 'Username'),
-
         ],
       ),
     );

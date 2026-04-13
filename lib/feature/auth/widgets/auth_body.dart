@@ -6,7 +6,6 @@ class AuthBody extends StatelessWidget {
   final Widget body;
   final String? bottomText;
   final String? bottomTextButton;
-  final bool visible;
 
   const AuthBody({
     super.key,
@@ -15,7 +14,7 @@ class AuthBody extends StatelessWidget {
     required this.body,
     this.bottomText,
     this.bottomTextButton,
-    this.visible = true,
+
   });
 
   @override
@@ -37,17 +36,7 @@ class AuthBody extends StatelessWidget {
               ),
             ),
             Expanded(child: body),
-            Visibility(
-              visible: visible,
-              child: Row(
-                mainAxisAlignment: .center,
-                children: [
-                  Text('$bottomText'),
-                  TextButton(
-                      onPressed: () {}, child: Text('$bottomTextButton')),
-                ],
-              ),
-            ),
+
           ],
         ),
       ),
