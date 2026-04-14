@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class RememberMe extends StatelessWidget {
@@ -6,10 +5,6 @@ class RememberMe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Row(
-      children: [
-
-      ],
-    );
+    return Row(children: [Switch(value: true, onChanged: (value) {})]);
   }
 }

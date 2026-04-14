@@ -8,6 +8,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:marketplace/feature/auth/presentation/sign_in_screen.dart';
 import 'package:marketplace/feature/auth/presentation/sign_up_screen.dart';
 import 'package:marketplace/feature/auth/presentation/splash_screen.dart';
+import 'package:marketplace/test.dart';
 
 
 void main() => runApp(
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
 
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      home: const GoogleAuthScreen(),
+      home: const LestStarte(),
     );
   }
 }
@@ -37,30 +38,16 @@ class LestStarte extends StatelessWidget {
     return Scaffold(
       bottomSheet: ElevatedButton(onPressed: (){}, child: Text('Hello')),
       appBar: AppBar(),
-      body: RichText(
-        text: TextSpan(
-          style: TextStyle(color: Colors.black, fontSize: 16),
-          children: [
-            TextSpan(text: "У вас есть аккаунт? "),
-            WidgetSpan(
-              alignment: PlaceholderAlignment.middle,
-              child: TextButton(
-                onPressed: () {
-                  // Действие при нажатии
-                },
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 4),
-                  minimumSize: Size.zero,
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                ),
-                child: Text(
-                  "Войти",
-                  style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ],
-        ),
+      body: Column(
+        spacing: 10,
+        children: [
+          AppButton(name: 'Create account', kraska: Colors.red, textColor: Colors.black,),
+          AppButton(name: 'Register',),
+          AppButton(name: 'Login',),
+          AppButton(name: 'Create account', width: 150,),
+          AppButton(name: 'Create account', width: 100,),
+          AppButton(name: 'Daud')
+        ],
       ),
     );
   }
