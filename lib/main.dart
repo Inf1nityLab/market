@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:marketplace/feature/auth/presentation/forgot_password_screen.dart';
@@ -10,12 +9,14 @@ import 'package:marketplace/feature/auth/presentation/sign_up_screen.dart';
 import 'package:marketplace/feature/auth/presentation/splash_screen.dart';
 import 'package:marketplace/feature/auth/presentation/verification_screen.dart';
 import 'package:marketplace/test.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
+void main() async {
 
-void main() => runApp(
-   MyApp(), // Wrap your app
-
-);
+  runApp(
+    MyApp(), // Wrap your app
+  );
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -23,10 +24,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      home: const VerificationScreen(),
+      home: const SignUpScreen(),
     );
   }
 }
@@ -37,21 +37,23 @@ class LestStarte extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: ElevatedButton(onPressed: (){}, child: Text('Hello')),
+      bottomSheet: ElevatedButton(onPressed: () {}, child: Text('Hello')),
       appBar: AppBar(),
       body: Column(
         spacing: 10,
         children: [
-          AppButton(name: 'Create account', kraska: Colors.red, textColor: Colors.black,),
-          AppButton(name: 'Register',),
-          AppButton(name: 'Login',),
-          AppButton(name: 'Create account', width: 150,),
-          AppButton(name: 'Create account', width: 100,),
-          AppButton(name: 'Daud')
+          AppButton(
+            name: 'Create account',
+            kraska: Colors.red,
+            textColor: Colors.black,
+          ),
+          AppButton(name: 'Register'),
+          AppButton(name: 'Login'),
+          AppButton(name: 'Create account', width: 150),
+          AppButton(name: 'Create account', width: 100),
+          AppButton(name: 'Daud'),
         ],
       ),
     );
   }
 }
-
-

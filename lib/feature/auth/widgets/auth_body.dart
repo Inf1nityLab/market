@@ -6,6 +6,7 @@ class AuthBody extends StatelessWidget {
   final Widget body;
   final String? bottomText;
   final String? bottomTextButton;
+  final Function()? onPressed;
 
   const AuthBody({
     super.key,
@@ -14,7 +15,7 @@ class AuthBody extends StatelessWidget {
     required this.body,
     this.bottomText,
     this.bottomTextButton,
-
+    this.onPressed,
   });
 
   @override
@@ -36,12 +37,11 @@ class AuthBody extends StatelessWidget {
               ),
             ),
             Expanded(child: body),
-
           ],
         ),
       ),
       bottomNavigationBar: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(textButton),
       ),
     );

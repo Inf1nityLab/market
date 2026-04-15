@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppTextFormField extends StatelessWidget {
   final String title;
-
-  const AppTextFormField({super.key, required this.title});
+  final TextEditingController? controller;
+  const AppTextFormField({super.key, required this.title, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,9 @@ class AppTextFormField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: .start,
         mainAxisSize: .min,
-        children: [Text(title), TextFormField()],
+        children: [Text(title), TextFormField(
+          controller: controller,
+        )],
       ),
     );
   }

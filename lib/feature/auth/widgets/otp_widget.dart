@@ -13,7 +13,8 @@ class OtpWidget extends StatelessWidget {
         style: TextStyle(fontSize: 20),
         maxLines: 1,
         textInputAction: TextInputAction.next,
-        decoration: InputDecoration(border: OutlineInputBorder(), contentPadding: EdgeInsets.symmetric(vertical: 40)),
+        decoration: InputDecoration(border: OutlineInputBorder(),
+            contentPadding: EdgeInsets.symmetric(vertical: 40)),
       ),
     );
   }
