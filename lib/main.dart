@@ -8,6 +8,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:marketplace/feature/auth/presentation/sign_in_screen.dart';
 import 'package:marketplace/feature/auth/presentation/sign_up_screen.dart';
 import 'package:marketplace/feature/auth/presentation/splash_screen.dart';
+import 'package:marketplace/feature/auth/presentation/verification_screen.dart';
 import 'package:marketplace/test.dart';
 
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
 
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      home: const LestStarte(),
+      home: const VerificationScreen(),
     );
   }
 }

@@ -5,12 +5,14 @@ class RichTextButton extends StatelessWidget {
   final String textOne;
   final String textTwo;
   final String textButton;
+  final Function()? onPressed;
 
   const RichTextButton({
     super.key,
     required this.textOne,
     required this.textTwo,
     required this.textButton,
+     this.onPressed,
   });
 
   @override
@@ -18,7 +20,6 @@ class RichTextButton extends StatelessWidget {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-
         text: textOne,
         style: TextStyle(color: Colors.red),
         children: [
@@ -29,7 +30,7 @@ class RichTextButton extends StatelessWidget {
           WidgetSpan(
             alignment: PlaceholderAlignment.middle,
             child: TextButton(
-              onPressed: () {},
+              onPressed: onPressed,
               child: Text(textButton, style: TextStyle(color: Colors.black)),
             ),
           ),
@@ -38,5 +39,3 @@ class RichTextButton extends StatelessWidget {
     );
   }
 }
-
-

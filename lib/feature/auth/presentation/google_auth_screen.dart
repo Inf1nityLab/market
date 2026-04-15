@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/feature/auth/presentation/sign_in_screen.dart';
 import 'package:marketplace/feature/auth/widgets/app_register_button.dart';
 import 'package:marketplace/feature/auth/widgets/auth_body.dart';
 import 'package:marketplace/feature/auth/widgets/rich_text_button.dart';
@@ -23,12 +24,23 @@ class GoogleAuthScreen extends StatelessWidget {
             textOne: '',
             textTwo: 'Already have an account',
             textButton: 'Sign in',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignInScreen()),
+              );
+            },
           ),
           RichTextButton(
             textOne: '',
             textTwo:
                 'By connecting your account confirm that you agree with our',
             textButton: 'Term and Condition',
+            onPressed: () {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text('Условия использования')));
+            },
           ),
         ],
       ),
