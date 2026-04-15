@@ -13,6 +13,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
 
+
   runApp(
     MyApp(), // Wrap your app
   );
@@ -31,29 +32,4 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class LestStarte extends StatelessWidget {
-  const LestStarte({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      bottomSheet: ElevatedButton(onPressed: () {}, child: Text('Hello')),
-      appBar: AppBar(),
-      body: Column(
-        spacing: 10,
-        children: [
-          AppButton(
-            name: 'Create account',
-            kraska: Colors.red,
-            textColor: Colors.black,
-          ),
-          AppButton(name: 'Register'),
-          AppButton(name: 'Login'),
-          AppButton(name: 'Create account', width: 150),
-          AppButton(name: 'Create account', width: 100),
-          AppButton(name: 'Daud'),
-        ],
-      ),
-    );
-  }
-}
