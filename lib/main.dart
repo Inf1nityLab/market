@@ -12,7 +12,11 @@ import 'package:marketplace/test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
-
+  await Supabase.initialize(
+    url: 'https://cmhwxpowyhecaymjgrxw.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNtaHd4cG93eWhlY2F5bWpncnh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyOTU0MjIsImV4cCI6MjA4ODg3MTQyMn0.AaKsfopBz0lJqAsNA_JWwb4ZdGsFYtta0MlTpQjR_FM',
+  );
 
   runApp(
     MyApp(), // Wrap your app
@@ -27,9 +31,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      home: const SignUpScreen(),
+      home: const SplashScreen(),
     );
   }
 }
-
-
