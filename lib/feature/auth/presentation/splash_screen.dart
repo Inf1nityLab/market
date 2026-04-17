@@ -26,18 +26,16 @@ class _SplashScreenState extends State<SplashScreen> {
     try {
       final session = await Supabase.instance.client.auth.currentSession;
 
+      if(!mounted) return;
+
       if (session != null) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
-        );
+        Navigator.pushReplacementNamed(context, '/home');
       } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Onboarding()),
-        );
+        Navigator.pushReplacementNamed(context, '/login');
       }
     } catch (e) {
+      if(!mounted) return;
+
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(e.toString())));
