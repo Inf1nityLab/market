@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/shared/circle_button.dart';
 
 class AuthBody extends StatelessWidget {
   final String title;
@@ -24,7 +25,7 @@ class AuthBody extends StatelessWidget {
       backgroundColor: Color(0xFFFEFEFE),
       appBar: AppBar(
         backgroundColor: Color(0xFFFEFEFE),
-        leading: CircleAvatar(child: Icon(Icons.arrow_back)),
+        leading: CircleButton(),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, bottom: 25),

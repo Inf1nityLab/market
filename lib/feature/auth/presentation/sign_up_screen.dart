@@ -4,6 +4,7 @@ import 'package:marketplace/feature/auth/widgets/auth_body.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../test.dart';
+import '../../main/presentation/home_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

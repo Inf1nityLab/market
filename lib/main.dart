@@ -11,6 +11,8 @@ import 'package:marketplace/feature/auth/presentation/verification_screen.dart';
 import 'package:marketplace/test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'feature/main/presentation/home_screen.dart';
+
 void main() async {
   await Supabase.initialize(
     url: 'https://cmhwxpowyhecaymjgrxw.supabase.co',
@@ -31,15 +33,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => SplashScreen(),
-        '/login': (context) => SignInScreen(),
-        '/register': (context) => SignUpScreen(),
-        '/home': (context) => HomeScreen(),
-      },
+      // initialRoute: '/home',
+      // routes: {
+      //   '/': (context) => SplashScreen(),
+      //   '/login': (context) => SignInScreen(),
+      //   '/register': (context) => SignUpScreen(),
+      //   '/home': (context) => HomeScreen(),
+      // },
 
-      //home: const SplashScreen(),
+      home: const HomeScreen(),
     );
   }
 }
