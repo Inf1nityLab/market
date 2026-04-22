@@ -13,6 +13,9 @@ class SignInScreen extends StatelessWidget {
     return AuthBody(
       title: 'Welcome',
       textButton: 'Sign up',
+      onPressed: (){
+        Navigator.pushNamed(context, '/register');
+      },
       body: Column(
         mainAxisAlignment: .center,
         children: [

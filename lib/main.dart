@@ -33,15 +33,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      // initialRoute: '/home',
-      // routes: {
-      //   '/': (context) => SplashScreen(),
-      //   '/login': (context) => SignInScreen(),
-      //   '/register': (context) => SignUpScreen(),
-      //   '/home': (context) => HomeScreen(),
-      // },
+      initialRoute: '/',
+      routes: {
+        '/': (context) => SplashScreen(),
+        '/login': (context) => SignInScreen(),
+        '/register': (context) => SignUpScreen(),
+        '/home': (context) => HomeScreen(),
+      },
 
-      home: const HomeScreen(),
     );
   }
 }
