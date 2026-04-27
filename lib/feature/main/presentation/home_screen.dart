@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:marketplace/shared/circle_button.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -14,6 +16,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String? selectedBrandId;
+  String? searchText;
+  Timer? _debounce;
 
   void logout() async {
     try {
@@ -41,11 +45,18 @@ class _HomeScreenState extends State<HomeScreen> {
         .toList();
   }
 
-  Future<List<ProductsModel>> fetchProducts({String? brandId}) async {
+  Future<List<ProductsModel>> fetchProducts({
+    String? brandId,
+    String? searchText,
+  }) async {
     var query = Supabase.instance.client.from('products1').select();
 
     if (brandId != null) {
-       await query.eq('brand_id', brandId);
+      query = query.eq('brand_id', brandId);
+    }
+
+    if (searchText != null) {
+      query = query.ilike('name', '%$searchText%');
     }
     final response = await query;
 
@@ -57,12 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // leading: CircleButton(
-        //   image: 'assets/images/women.png',
-        //   onTap: (){},
-        // ),
-      ),
+      appBar: AppBar(),
       drawer: Drawer(
         child: Column(
           children: [
@@ -79,6 +85,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
       body: CustomScrollView(
         slivers: [
+          SliverToBoxAdapter(
+            child: TextField(
+              onChanged: (value) {
+                // Если пользователь продолжает печатать, отменяем старый таймер
+                if (_debounce?.isActive ?? false) _debounce!.cancel();
+
+                // Запускаем новый таймер на 500 миллисекунд
+                _debounce = Timer(const Duration(milliseconds: 500), () {
+                  setState(() {
+                    searchText = value
+                        .trim(); // Обновляем текст и перерисовываем экран
+                  });
+                });
+              },
+              decoration: InputDecoration(border: OutlineInputBorder()),
+            ),
+          ),
+          SliverToBoxAdapter(child: SizedBox(height: 20)),
           SliverToBoxAdapter(
             child: SizedBox(
               height: 100,
@@ -116,15 +140,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         return GestureDetector(
                           onTap: () {
-
                             setState(() {
-                              if(isSelected){
+                              if (isSelected) {
                                 selectedBrandId = null;
-                              }else{
+                              } else {
                                 selectedBrandId = brand.id;
                               }
                             });
-
                           },
                           child: Container(
                             margin: const EdgeInsets.only(right: 10),
@@ -132,12 +154,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             decoration: BoxDecoration(
                               color: Colors.grey[200],
                               borderRadius: BorderRadius.circular(15),
-                              border: Border.all(color: isSelected ? Colors.red : Colors.transparent)
+                              border: Border.all(
+                                color: isSelected
+                                    ? Colors.red
+                                    : Colors.transparent,
+                              ),
                             ),
                             alignment: Alignment.center,
                             child: Text(
                               brand.title,
-                              style: const TextStyle(fontWeight: FontWeight.w600),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         );
@@ -151,7 +179,10 @@ class _HomeScreenState extends State<HomeScreen> {
           SliverToBoxAdapter(
             child: Expanded(
               child: FutureBuilder(
-                future: fetchProducts(brandId: selectedBrandId),
+                future: fetchProducts(
+                  brandId: selectedBrandId,
+                  searchText: searchText,
+                ),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
