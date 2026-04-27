@@ -13,6 +13,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String? selectedBrandId;
+
   void logout() async {
     try {
       await Supabase.instance.client.auth.signOut();
@@ -39,8 +41,13 @@ class _HomeScreenState extends State<HomeScreen> {
         .toList();
   }
 
-  Future<List<ProductsModel>> fetchProducts() async {
-    final response = await Supabase.instance.client.from('products1').select();
+  Future<List<ProductsModel>> fetchProducts({String? brandId}) async {
+    var query = Supabase.instance.client.from('products1').select();
+
+    if (brandId != null) {
+       await query.eq('brand_id', brandId);
+    }
+    final response = await query;
 
     return (response as List)
         .map((product) => ProductsModel.fromJson(product))
@@ -105,17 +112,33 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemCount: brands.length,
                       itemBuilder: (context, index) {
                         final brand = brands[index];
-                        return Container(
-                          margin: const EdgeInsets.only(right: 10),
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            brand.title,
-                            style: const TextStyle(fontWeight: FontWeight.w600),
+                        final isSelected = brand.id == selectedBrandId;
+
+                        return GestureDetector(
+                          onTap: () {
+
+                            setState(() {
+                              if(isSelected){
+                                selectedBrandId = null;
+                              }else{
+                                selectedBrandId = brand.id;
+                              }
+                            });
+
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(right: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(color: isSelected ? Colors.red : Colors.transparent)
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              brand.title,
+                              style: const TextStyle(fontWeight: FontWeight.w600),
+                            ),
                           ),
                         );
                       },
@@ -128,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SliverToBoxAdapter(
             child: Expanded(
               child: FutureBuilder(
-                future: fetchProducts(),
+                future: fetchProducts(brandId: selectedBrandId),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -161,7 +184,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 100,
                               width: 100,
                             ),
-                            IconButton(onPressed: (){}, icon: Icon(Icons.favorite_border))
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.favorite_border),
+                            ),
                           ],
                         ),
                       );
