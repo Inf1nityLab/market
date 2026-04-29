@@ -1,19 +1,11 @@
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
-import 'package:marketplace/feature/auth/presentation/forgot_password_screen.dart';
-import 'package:marketplace/feature/auth/presentation/google_auth_screen.dart';
-import 'package:marketplace/feature/auth/presentation/onboarding.dart';
-import 'package:device_preview/device_preview.dart';
-import 'package:marketplace/feature/auth/presentation/sign_in_screen.dart';
-import 'package:marketplace/feature/auth/presentation/sign_up_screen.dart';
-import 'package:marketplace/feature/auth/presentation/splash_screen.dart';
-import 'package:marketplace/feature/auth/presentation/verification_screen.dart';
-import 'package:marketplace/test.dart';
+import 'package:marketplace/feature/main/presentation/detail_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'feature/main/presentation/home_screen.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(
     url: 'https://cmhwxpowyhecaymjgrxw.supabase.co',
     anonKey:
@@ -33,13 +25,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => SplashScreen(),
-        '/login': (context) => SignInScreen(),
-        '/register': (context) => SignUpScreen(),
-        '/home': (context) => HomeScreen(),
-      },
+      // initialRoute: '/',
+      // routes: {
+      //   '/': (context) => SplashScreen(),
+      //   '/login': (context) => SignInScreen(),
+      //   '/register': (context) => SignUpScreen(),
+      //   '/home': (context) => HomeScreen(),
+      // },
+
+      home: DetailScreen(),
 
     );
   }
