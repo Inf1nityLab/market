@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:marketplace/feature/main/presentation/detail_screen.dart';
 import 'package:marketplace/shared/circle_button.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -124,8 +125,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 searchText: searchText,
               ),
             ),
-
-
           ],
         ),
       ),
@@ -165,7 +164,15 @@ class ProductBody extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               return GestureDetector(
-                onTap: (){},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          DetailScreen(productsModel: snapshot.data![index]),
+                    ),
+                  );
+                },
                 child: Container(
                   color: Colors.grey.shade100,
                   child: Column(
@@ -283,5 +290,3 @@ class CategoryBody extends StatelessWidget {
     );
   }
 }
-
-

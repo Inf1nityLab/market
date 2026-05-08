@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:marketplace/feature/main/presentation/detail_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'feature/auth/presentation/sign_in_screen.dart';
+import 'feature/auth/presentation/sign_up_screen.dart';
+import 'feature/auth/presentation/splash_screen.dart';
+import 'feature/main/presentation/home_screen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,15 +30,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      // initialRoute: '/',
-      // routes: {
-      //   '/': (context) => SplashScreen(),
-      //   '/login': (context) => SignInScreen(),
-      //   '/register': (context) => SignUpScreen(),
-      //   '/home': (context) => HomeScreen(),
-      // },
+      initialRoute: '/',
+      routes: {
+        '/': (context) => SplashScreen(),
+        '/login': (context) => SignInScreen(),
+        '/register': (context) => SignUpScreen(),
+        '/home': (context) => HomeScreen(),
+      },
 
-      home: DetailScreen(),
+      // home: DetailScreen(),
 
     );
   }

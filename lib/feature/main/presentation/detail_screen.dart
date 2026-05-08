@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/feature/main/model/products_model.dart';
 import 'package:marketplace/shared/circle_button.dart';
 import 'package:marketplace/shared/sized_box_widget.dart';
 
 import '../../../shared/view_all_widget.dart';
 
 class DetailScreen extends StatefulWidget {
-  const DetailScreen({super.key});
+  final ProductsModel productsModel;
+  const DetailScreen({super.key, required this.productsModel});
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -17,9 +19,9 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          MainProductBody(),
+          MainProductBody(image: widget.productsModel.imageUrl,),
           SizesBoxWidget(height: 10),
-          PriceBody(),
+          PriceBody(name: widget.productsModel.name, price: widget.productsModel.price),
           SizesBoxWidget(height: 10),
           ImagesBody(),
           SizesBoxWidget(height: 10),
@@ -37,7 +39,8 @@ class _DetailScreenState extends State<DetailScreen> {
 }
 
 class MainProductBody extends StatelessWidget {
-  const MainProductBody({super.key});
+  final String image;
+  const MainProductBody({super.key, required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +56,7 @@ class MainProductBody extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Padding(
                 padding: const EdgeInsets.only(top: 40),
-                child: Image.asset('assets/images/wom.png', fit: BoxFit.cover),
+                child: Image.network(image, fit: BoxFit.cover),
               ),
             ),
       
@@ -70,7 +73,9 @@ class MainProductBody extends StatelessWidget {
 }
 
 class PriceBody extends StatelessWidget {
-  const PriceBody({super.key});
+  final String name;
+  final int price;
+  const PriceBody({super.key, required this.name, required this.price});
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +89,7 @@ class PriceBody extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text('Name'), Text('\$120')],
+            children: [Text(name), Text('\$$price')],
           ),
         ],
       ),
