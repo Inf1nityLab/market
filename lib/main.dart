@@ -1,8 +1,11 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace/feature/main/presentation/detail_screen.dart';
+import 'package:marketplace/feature/product_screen.dart';
+import 'package:marketplace/service/product_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'cubit/product_cubit.dart';
 import 'feature/auth/presentation/sign_in_screen.dart';
 import 'feature/auth/presentation/sign_up_screen.dart';
 import 'feature/auth/presentation/splash_screen.dart';
@@ -14,7 +17,7 @@ void main() async {
   await Supabase.initialize(
     url: 'https://cmhwxpowyhecaymjgrxw.supabase.co',
     anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNtaHd4cG93eWhlY2F5bWpncnh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyOTU0MjIsImV4cCI6MjA4ODg3MTQyMn0.AaKsfopBz0lJqAsNA_JWwb4ZdGsFYtta0MlTpQjR_FM',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNtaHd4cG93eWhlY2F5bWpncnh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyOTU0MjIsImV4cCI6MjA4ODg3MTQyMn0.AaKsfopBz0lJqAsNA_JWwb4ZdGsFYtta0MlTpQjR_FM',
   );
 
   runApp(
@@ -27,19 +30,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => SplashScreen(),
-        '/login': (context) => SignInScreen(),
-        '/register': (context) => SignUpScreen(),
-        '/home': (context) => HomeScreen(),
-      },
+    return BlocProvider(
+      create: (context) => ProductCubit(ProductService()),
+      child: MaterialApp(
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        // initialRoute: '/',
+        // routes: {
+        //   '/': (context) => SplashScreen(),
+        //   '/login': (context) => SignInScreen(),
+        //   '/register': (context) => SignUpScreen(),
+        //   '/home': (context) => HomeScreen(),
+        // },
 
-      // home: DetailScreen(),
+        home: ProductScreen(),
 
+      ),
     );
   }
 }
